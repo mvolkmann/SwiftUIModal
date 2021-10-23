@@ -7,11 +7,9 @@ struct MyModal: View {
         VStack {
             //Color.yellow //.ignoresSafeArea()
             Text("modal content").padding(20)
-            Button("Close") {
-                self.show.toggle() //TODO: Need self.?
-            }
+            Button("Close") { show.toggle() }
         }
-        .border(.red)
+        .background(.red)
     }
 }
 
@@ -21,16 +19,16 @@ struct ContentView: View {
     var body: some View {
         VStack {
             Text("main view")
-            Button(action: { self.showModal = true }) {
+            Button(action: { showModal = true }) {
                 Text("Show Modal")
-                    .padding()
-                    .background(.yellow)
-                    .cornerRadius(10)
+                .padding()
+                .background(.yellow)
+                .cornerRadius(10)
             }
-                .sheet(isPresented: $showModal) {
-                    // By default the sheet slides in from the bottom.
-                    MyModal(show: self.$showModal)
-                }
+            .sheet(isPresented: $showModal) {
+                // By default the sheet slides in from the bottom.
+                MyModal(show: $showModal)
+            }
         }
     }
 }
